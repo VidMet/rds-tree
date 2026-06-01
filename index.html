@@ -272,17 +272,13 @@ function hentAlleIds(nodeMap) {
         const barnIds = hentAlleIds(nodeMap.barn[key]);
         for (const mid in barnIds) {
             if (!idMap[mid]) idMap[mid] = [];
-            idMap[mid].push(...barnIds[mid]);
+            
+            // LØSNINGEN: Bruker .concat() i stedet for .push(...) for å 
+            // unngå "Maximum call stack size exceeded" på enorme datamengder.
+            idMap[mid] = idMap[mid].concat(barnIds[mid]);
         }
     }
     return idMap;
-}
-
-function formaterForMarkering(idMap) {
-    return Object.keys(idMap).map(mid => ({
-        modelId: mid,
-        objectRuntimeIds: idMap[mid]
-    }));
 }
 
 function tegnOppTre(treStruktur, container, erRot = true) {
