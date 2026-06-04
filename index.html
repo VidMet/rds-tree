@@ -2,7 +2,7 @@
 <html lang="nb">
 <head>
   <meta charset="UTF-8"/>
-  <title>RDS Viewer v1.02</title>
+  <title>RDS Viewer v1.03</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   
   <script src="https://components.connect.trimble.com/trimble-connect-workspace-api/index.js"></script>
@@ -111,7 +111,7 @@
 
 <header>
   <div class="header-title">
-    <h1>RDS Viewer <span class="version">v1.02</span></h1>
+    <h1>RDS Viewer <span class="version">v1.03</span></h1>
     <p>Hierarkisk visning av RDS-strukturen</p>
   </div>
   <span class="badge" id="modelBadge">Frakoblet</span>
@@ -279,6 +279,13 @@ function hentAlleIds(nodeMap) {
         }
     }
     return idMap;
+}
+
+function formaterForMarkering(idMap) {
+    return Object.keys(idMap).map(mid => ({
+        modelId: mid,
+        objectRuntimeIds: idMap[mid]
+    }));
 }
 
 function tegnOppTre(treStruktur, container, erRot = true) {
